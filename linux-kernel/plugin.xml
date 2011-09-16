@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.cdt.managedbuilder.core.buildDefinitions">
+      <projectType
+            id="linux-kernel.projectType.linux"
+            isAbstract="false"
+            name="Linux Kernel">
+         <configuration
+               id="linux-kernel.configuration.zImage"
+               name="zImage"
+               parent="linux-kernel.configuration.zImageAbstract">
+            <toolChain
+                  id="linux-kernel.toolChain.linux"
+                  isAbstract="false"
+                  name="arm-2008q1"
+                  superClass="linux-kernel.toolChain.linuxAbstract">
+               <targetPlatform
+                     id="linux-kernel.targetPlatform.linux"
+                     isAbstract="false"
+                     name="TP">
+               </targetPlatform>
+               <builder
+                     id="linux-kernel.builder.linux"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     name="make zImage"
+                     superClass="linux-kernel.builder.linuxAbstract">
+               </builder>
+               <tool
+                     id="linux-kernel.tool.linux"
+                     isAbstract="false"
+                     superClass="linux-kernel.tool.linuxAbstract">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
+      <configuration
+            cleanCommand="clean"
+            id="linux-kernel.configuration.zImageAbstract"
+            name="zImage abstract">
+      </configuration>
+      <toolChain
+            id="linux-kernel.toolChain.linuxAbstract"
+            isAbstract="true"
+            name="arm-2008q1 Abstract">
+      </toolChain>
+      <builder
+            arguments="--jobs=48"
+            autoBuildTarget="zImage"
+            cleanBuildTarget="clean"
+            command="ssh vlblc017 make ${ProjDirPath}"
+            id="linux-kernel.builder.linuxAbstract"
+            incrementalBuildTarget="zImage"
+            isAbstract="true"
+            isVariableCaseSensitive="false"
+            name="make zImage Abstract"
+            superClass="org.eclipse.cdt.build.core.settings.default.builder"
+            supportsManagedBuild="false">
+      </builder>
+      <tool
+            id="linux-kernel.tool.linuxAbstract"
+            isAbstract="true"
+            name="Linux Tool Abstract"
+            superClass="org.eclipse.cdt.build.core.settings.holder">
+         <inputType
+               id="linux-kernel.inputType.linux"
+               sourceContentType="org.eclipse.cdt.core.cSource"
+               superClass="org.eclipse.cdt.build.core.settings.holder.inType">
+         </inputType>
+         <envVarBuildPath
+               pathType="buildpathInclude"
+               variableList="linux-kernel.envVarBuildPath1">
+         </envVarBuildPath>
+         <option
+               id="linux-kernel.option.linux"
+               isAbstract="false"
+               name="Include path"
+               resourceFilter="all"
+               superClass="org.eclipse.cdt.build.core.settings.holder.incpaths"
+               valueType="includePath">
+            <listOptionValue
+                  builtIn="false"
+                  value="include/">
+            </listOptionValue>
+            <listOptionValue
+                  builtIn="false"
+                  value="arch/arm/mach-xgold/include">
+            </listOptionValue>
+            <listOptionValue
+                  builtIn="false"
+                  value="arch/arm/plat-xgold/include">
+            </listOptionValue>
+         </option>
+      </tool>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="linux-kernel.category"
+            name="Intel">
+      </category>
+      <wizard
+            canFinishEarly="false"
+            category="linux-kernel.category"
+            class="com.intel.linux.wizard.LinuxWizard"
+            finalPerspective="org.eclipse.cdt.ui.CPerspective"
+            hasPages="true"
+            icon="icons/linux.gif"
+            id="linux-kernel.wizard.linux"
+            name="Browse and build kernel"
+            project="true">
+         <description>
+            To browse and build Linux kernel.
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>
