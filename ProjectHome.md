@@ -1,0 +1,1 @@
+Plugin for Eclipse to easily compile and browse linux kernel sources.
